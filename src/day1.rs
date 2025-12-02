@@ -83,5 +83,3 @@ fn part2() -> i32 {
 
     solution
 }
-
-
