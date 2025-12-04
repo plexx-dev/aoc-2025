@@ -1,6 +1,6 @@
 use std::{fs::File, io::Read, path::Path};
 
-pub fn solve() -> (u32, i32) {
+pub fn solve() -> (u32, u128) {
     (part1(), part2())
 }
 
@@ -42,18 +42,45 @@ fn part1() -> u32 {
         }
 
         solution += 10 * first + scnd;
-
-        println!("{line}    {first}{scnd}");
     }
 
     solution
 }
 
-fn part2() -> i32 {
-    let mut solution = 0;
+fn part2() -> u128 {
+    let mut solution: u128 = 0;
     let s = get_puzzle_input();
 
-    for line in s.lines() {}
+    for line in s.lines() {
+        let nums: Vec<u32> = line.chars().map(|x| x.to_digit(10).unwrap()).collect();
+
+        println!("\n\n\n{line}");
+        let mut idx: Vec<usize> = vec![0];
+        for pos in (1..=12).rev() {
+            let n = if pos == 12 { 0 } else { *idx.last().unwrap() };
+
+            let mut biggest = 0;
+            let mut biggest_idx = 0;
+            for (i, x) in nums.iter().enumerate().take(nums.len() - pos + 1).skip(n) {
+                if biggest < *x {
+                    biggest = *x;
+                    biggest_idx = i;
+                }
+            }
+
+            //println!(
+            //    "{biggest} {:?}",
+            //    nums.iter()
+            //        .take(nums.len() - pos + 1)
+            //        .skip(n)
+            //        .collect::<Vec<&u32>>()
+            //);
+
+            idx.push(biggest_idx + 1);
+
+            solution += 10_u128.pow(pos as u32 - 1) * biggest as u128;
+        }
+    }
 
     solution
 }
