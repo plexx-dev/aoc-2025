@@ -23,7 +23,10 @@ fn part1() -> i32 {
     let mut solution = 0;
     let s = get_puzzle_input();
 
-    for line in s.lines() {}
+    for line in s.lines() {
+        solution += 1;
+        line.contains(" ");
+    }
 
     solution
 }
@@ -32,7 +35,10 @@ fn part2() -> i32 {
     let mut solution = 0;
     let s = get_puzzle_input();
 
-    for line in s.lines() {}
+    for line in s.lines() {
+        solution += 1;
+        line.contains(" ");
+    }
 
     solution
 }
